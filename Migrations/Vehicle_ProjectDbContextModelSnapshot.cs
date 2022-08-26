@@ -246,9 +246,6 @@ namespace Vehicl_Project.Migrations
                     b.Property<int>("ColorId")
                         .HasColumnType("int");
 
-                    b.Property<string>("ColorName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(25)
@@ -275,9 +272,6 @@ namespace Vehicl_Project.Migrations
                     b.Property<int>("ColorId")
                         .HasColumnType("int");
 
-                    b.Property<string>("ColorName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(25)
@@ -303,9 +297,6 @@ namespace Vehicl_Project.Migrations
 
                     b.Property<int>("ColorId")
                         .HasColumnType("int");
-
-                    b.Property<string>("ColorName")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Headlights")
                         .HasColumnType("bit");

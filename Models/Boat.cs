@@ -11,9 +11,7 @@ namespace Vehicl_Project.Models
         [MinLength(2, ErrorMessage = "Boat Name must be at least 2 character")]
         public string Name { get; set; }
         public string? Brand { get; set; }
-        public Color? Color { get; set; }
+        public virtual Color Color { get; set; }
         public int ColorId { get; set; }
-        [Display(Name = "Color Name")]
-        public string? ColorName { get; set; }
     }
 }

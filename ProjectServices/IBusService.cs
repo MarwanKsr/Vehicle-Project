@@ -12,7 +12,6 @@ namespace Vehicl_Project.ProjectServices
         Task<bool> IsExists(int id);
         Task<bool> IsTableExists();
         Task<IEnumerable<Color>> GetColors();
-        Task<string> SetColorNameById(int id);
         Task<Bus> GetById(int id);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using Vehicl_Project.Areas.Identity.Data;
 using Vehicl_Project.Models;
 
@@ -40,7 +41,8 @@ namespace Vehicl_Project.DataAccess
 
         public async Task<Car> GetById(int id)
         {
-            var car = _context.Cars.FirstOrDefault(c => c.Id == id);
+            var car = await _context.Cars.SingleOrDefaultAsync(c => c.Id == id);
+
             return car;
         }
 
@@ -66,12 +68,6 @@ namespace Vehicl_Project.DataAccess
         {
             var cars = await _context.Cars.AnyAsync();
             return cars;
-        }
-
-        public async Task<string> SetColorNameById(int id)
-        {
-            var color = await _context.Colors.FirstOrDefaultAsync(c => c.Id == id);
-            return color.Name;
         }
     }
 }

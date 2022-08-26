@@ -36,18 +36,13 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Headlights)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Color)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Color.Name)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Color.Id)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Color.Name)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ColorName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ColorName)
-        </dd>
+        
     </dl>
     
     <form asp-action="Delete">

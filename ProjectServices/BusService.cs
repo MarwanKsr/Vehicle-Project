@@ -62,10 +62,5 @@ namespace Vehicl_Project.ProjectServices
             var buses = _busRepository.IsTableExists();
             return buses;
         }
-
-        public async Task<string> SetColorNameById(int id)
-        {
-            return await _busRepository.SetColorNameById(id);
-        }
     }
 }

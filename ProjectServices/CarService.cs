@@ -1,20 +1,25 @@
-﻿using Vehicl_Project.DataAccess;
+﻿using AutoMapper;
+using Vehicl_Project.DataAccess;
 using Vehicl_Project.Models;
+using Vehicl_Project.ViewModel;
 
 namespace Vehicl_Project.ProjectServices
 {
     public class CarService : ICarService
     {
         private readonly ICarRepository _carRepository;
+        private readonly IMapper _mapper;
         
-        public CarService(ICarRepository carRepository)
+        public CarService(ICarRepository carRepository, IMapper mapper)
         {
             _carRepository = carRepository;
+            _mapper = mapper;
         }
 
-        public async Task Create(Car entity)
+        public async Task Create(AddCarVM entity)
         {
-             await _carRepository.Create(entity);
+            var car = _mapper.Map<Car>(entity);
+            await _carRepository.Create(car);
         }
 
         public async Task Delete(int id)
@@ -28,9 +33,10 @@ namespace Vehicl_Project.ProjectServices
             return car;
         }
 
-        public async Task Edit(Car entity)
+        public async Task Edit(EditCarVM entity)
         {
-            await _carRepository.Edit(entity);
+            var car = _mapper.Map<Car>(entity);
+            await _carRepository.Edit(car);
         }
 
         public async Task<Car> GetById(int id)
@@ -43,6 +49,13 @@ namespace Vehicl_Project.ProjectServices
         {
            var colors = await _carRepository.GetColors();
             return colors;
+        }
+
+        public async Task<EditCarVM> GetForEdit(int id)
+        {
+            var car = await _carRepository.GetById(id);
+            var result = _mapper.Map<EditCarVM>(car);
+            return result;
         }
 
         public async Task<IList<Car>> Index()
@@ -63,9 +76,6 @@ namespace Vehicl_Project.ProjectServices
             return cars;
         }
 
-        public async Task<string> SetColorNameById(int id)
-        {
-            return await _carRepository.SetColorNameById(id);
-        }
+        
     }
 }

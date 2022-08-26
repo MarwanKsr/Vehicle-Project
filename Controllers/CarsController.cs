@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Vehicl_Project.Areas.Identity.Data;
 using Vehicl_Project.Models;
 using Vehicl_Project.ProjectServices;
+using Vehicl_Project.ViewModel;
 
 namespace Vehicl_Project.Controllers
 {
@@ -54,15 +55,15 @@ namespace Vehicl_Project.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Vendor")]
-        public async Task<IActionResult> Create([Bind("Id,Name,Brand,Wheels,Headlights,ColorId")] Car car)
+        public async Task<IActionResult> Create([Bind("Name,Brand,Wheels,Headlights,ColorId")] AddCarVM car)
         {
             if (ModelState.IsValid)
             {
-                car.ColorName = await _carService.SetColorNameById(car.ColorId);
+                
                 await _carService.Create(car);
                 return RedirectToAction(nameof(Index));
             }
-            ViewBag.ColorsList = new SelectList(await _carService.GetColors(), "Id", "Name",car.ColorId);
+            ViewBag.ColorsList = new SelectList(await _carService.GetColors(), "Id", "Name");
             return View(car);
         }
 
@@ -75,7 +76,7 @@ namespace Vehicl_Project.Controllers
                 return NotFound();
             }
 
-            var car = await _carService.GetById(id);
+            var car = await _carService.GetForEdit(id);
 
             ViewBag.ColorsList = new SelectList(await _carService.GetColors(), "Id", "Name");
             return View(car);
@@ -88,7 +89,7 @@ namespace Vehicl_Project.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Vendor")]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Brand,Wheels,Headlights,ColorId")] Car car)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Brand,Headlights,ColorId")] EditCarVM car)
         {
             if (id != car.Id)
             {
@@ -99,7 +100,7 @@ namespace Vehicl_Project.Controllers
             {
                 try
                 {
-                    car.ColorName = await _carService.SetColorNameById(car.ColorId);
+                    
                     await _carService.Edit(car);
                 }
                 catch (DbUpdateConcurrencyException)
@@ -115,7 +116,7 @@ namespace Vehicl_Project.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewBag.ColorsList = new SelectList(await _carService.GetColors(), "Id", "Name", car.ColorId);
+            ViewBag.ColorsList = new SelectList(await _carService.GetColors(), "Id", "Name");
             return View(car);
         }
 

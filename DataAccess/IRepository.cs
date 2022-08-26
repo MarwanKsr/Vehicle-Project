@@ -14,7 +14,6 @@ namespace Vehicl_Project.DataAccess
         Task<bool> IsTableExists();
         Task<T> GetById(int id);
         Task<IEnumerable<Color>> GetColors();
-        Task<string> SetColorNameById(int id);
 
     }
 }

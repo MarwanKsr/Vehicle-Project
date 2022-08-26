@@ -62,10 +62,5 @@ namespace Vehicl_Project.ProjectServices
             var boats = _boatRepository.IsTableExists();
             return boats;
         }
-
-        public async Task<string> SetColorNameById(int id)
-        {
-            return await _boatRepository.SetColorNameById(id);
-        }
     }
 }

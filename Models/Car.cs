@@ -12,10 +12,8 @@ namespace Vehicl_Project.Models
         public string Name { get; set; }
         public string? Brand { get; set; }
         public int Wheels { get; set; } = 4;
-        public bool Headlights { get; set; } = true;
-        public Color? Color { get; set; }
+        public bool Headlights { get; set; } 
+        public virtual Color Color { get; set; }
         public int ColorId { get; set; }
-        [Display(Name = "Color Name")]
-        public string? ColorName { get; set; }
     }
 }

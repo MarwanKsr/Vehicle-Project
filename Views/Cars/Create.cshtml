@@ -1,4 +1,4 @@
-﻿@model Vehicl_Project.Models.Car
+﻿@model Vehicl_Project.ViewModel.AddCarVM
 
 @{
     ViewData["Title"] = "Create";
@@ -35,7 +35,9 @@
             </div>
             <div class="form-group">
                 <label asp-for="ColorName" class="control-label"></label>
-                <select asp-for="ColorId" class ="form-control" asp-items="ViewBag.ColorsList"></select>
+                <select asp-for="ColorId" class ="form-control" asp-items="ViewBag.ColorsList">
+                    <option selected  value=null>--Select Color--</option>
+                </select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

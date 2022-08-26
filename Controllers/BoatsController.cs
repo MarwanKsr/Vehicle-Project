@@ -58,7 +58,6 @@ namespace Vehicl_Project.Controllers
         {
             if (ModelState.IsValid)
             {
-                boat.ColorName = await _boatService.SetColorNameById(boat.ColorId);
                 await _boatService.Create(boat);
                 return RedirectToAction(nameof(Index));
             }
@@ -97,7 +96,6 @@ namespace Vehicl_Project.Controllers
             {
                 try
                 {
-                    boat.ColorName = await _boatService.SetColorNameById(boat.ColorId);
                     await _boatService.Edit(boat);
                 }
                 catch (DbUpdateConcurrencyException)

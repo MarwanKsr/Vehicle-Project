@@ -21,7 +21,7 @@ namespace Vehicl_Project.DataAccess
 
         public async Task Delete(int id)
         {
-            var color = await _context.Colors.FirstOrDefaultAsync(c => c.Id == id);
+            var color = await _context.Colors.FirstAsync(c => c.Id == id);
             _context.Colors.Remove(color);
             await _context.SaveChangesAsync();
         }

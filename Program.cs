@@ -1,18 +1,24 @@
 using Microsoft.AspNetCore.Identity;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Vehicl_Project.Areas.Identity.Data;
 using Vehicl_Project.DataAccess;
 using Vehicl_Project.ProjectServices;
+using Vehicl_Project.ProjectServices.Mapping;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("Vehicle_ProjectDbContextConnection") ?? throw new InvalidOperationException("Connection string 'Vehicle_ProjectDbContextConnection' not found.");
 
 builder.Services.AddDbContext<Vehicle_ProjectDbContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseSqlServer(connectionString)
+    .UseLazyLoadingProxies());
 
 builder.Services.AddDefaultIdentity<Vehicle_ProjectUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<Vehicle_ProjectDbContext>();
+
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -24,6 +30,8 @@ builder.Services.AddScoped<IBoatRepository, BoatRepository>();
 builder.Services.AddScoped<IBoatService, BoatService>();
 builder.Services.AddScoped<IColorRepository, ColorRepository>();
 builder.Services.AddScoped<IColorService, ColorService>();
+
+builder.Services.AddAutoMapper(typeof(MapProfile));
 
 AddAuthrozitionPolitics();
 

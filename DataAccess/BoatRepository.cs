@@ -66,11 +66,5 @@ namespace Vehicl_Project.DataAccess
             var boats = await _context.Boats.AnyAsync();
             return boats;
         }
-
-        public async Task<string> SetColorNameById(int id)
-        {
-            var color = await _context.Colors.FirstOrDefaultAsync(c => c.Id == id);
-            return color.Name;
-        }
     }
 }
